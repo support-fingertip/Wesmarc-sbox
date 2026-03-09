@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Display_Size_can_be_given_to_Westeam__c</fullName>
+    <externalId>false</externalId>
+    <label>Display Size can be given to Westeam</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type_of_Display__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Display_Size_can_be_given_to_Westeam</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>LGP</controllingFieldValue>
+            <valueName>Lead Generation Partners</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nano Cube</controllingFieldValue>
+            <valueName>150 sqft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mini Cube</controllingFieldValue>
+            <valueName>250 sqft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Smart Cube</controllingFieldValue>
+            <valueName>500 sqft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pavilion</controllingFieldValue>
+            <valueName>1000 sqft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Large Pavilion</controllingFieldValue>
+            <valueName>Above 1500 sqft</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

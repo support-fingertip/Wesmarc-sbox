@@ -1,0 +1,14 @@
+<aura:component controller="CheckInCheckOutController" implements="force:lightningQuickActionWithoutHeader,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="spinner" type="boolean" default="false"/>	
+       <aura:attribute name="checkedIn" type="object" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+     <!-- spinner -->
+      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <aura:if isTrue="{!v.spinner}">
+            <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+        </aura:if>
+    </div>
+     <lightning:navigation aura:id="navigationService" />
+</aura:component>

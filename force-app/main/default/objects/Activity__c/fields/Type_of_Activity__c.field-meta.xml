@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Activity__c</fullName>
+    <externalId>false</externalId>
+    <label>Type of Activity</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nano Meet</fullName>
+                <default>false</default>
+                <label>Nano Meet</label>
+            </value>
+            <value>
+                <fullName>Mega Meet</fullName>
+                <default>false</default>
+                <label>Mega Meet</label>
+            </value>
+            <value>
+                <fullName>Delight Studio</fullName>
+                <default>false</default>
+                <label>Delight Studio</label>
+            </value>
+            <value>
+                <fullName>Factory Tour</fullName>
+                <default>false</default>
+                <label>Factory Tour</label>
+            </value>
+            <value>
+                <fullName>SSC Training</fullName>
+                <default>false</default>
+                <label>SSC Training</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

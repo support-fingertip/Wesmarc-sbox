@@ -1,0 +1,7 @@
+<aura:component implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="objectApiName" type="String" />
+    <c:newSalesPipeline
+                        recordId="{!v.recordId}"
+                        objectApiName="{!v.objectApiName}"/>
+</aura:component>

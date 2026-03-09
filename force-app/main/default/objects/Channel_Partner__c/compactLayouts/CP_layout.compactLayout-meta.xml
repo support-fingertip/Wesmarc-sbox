@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_layout</fullName>
+    <fields>Name</fields>
+    <fields>Company_Name__c</fields>
+    <fields>Source_Type__c</fields>
+    <fields>Mobile__c</fields>
+    <fields>Tentative_Date_of_Lead_Closure__c</fields>
+    <label>CP layout</label>
+</CompactLayout>

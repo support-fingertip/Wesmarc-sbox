@@ -1,0 +1,24 @@
+<template>
+    <ul class="slds-theme_default">
+    </ul>
+    <lightning-input
+        type="search"
+        label={label}
+        value={searchKey}
+        onchange={handleSearch}
+        placeholder="Search..."
+        class="slds-m-bottom_x-small"
+    ></lightning-input>
+
+    <template if:true={records}>
+        <ul class="slds-p-around_x-small slds-scrollable_y slds-theme_default" style="max-height: 150px;">
+            <template for:each={records} for:item="record">
+                <li key={record.Id} class="slds-p-vertical_x-small slds-border_bottom">
+                    <span class="lookup-result-item slds-truncate" role="button" tabindex="0" data-id={record.Id} data-name={record.Name} onclick={handleSelect}>
+                        {record.Name}
+                    </span>
+                </li>
+            </template>
+        </ul>
+    </template>
+</template>

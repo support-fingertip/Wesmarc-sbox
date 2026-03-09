@@ -1,0 +1,96 @@
+:host {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+lightning-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px #5b75ea1a;
+    padding: 2rem;
+}
+
+.slds-form-element {
+    margin-bottom: 1.5rem;
+}
+
+lightning-input,
+lightning-combobox,
+lightning-radio-group,
+lightning-textarea {
+    --slds-c-input-radius-border: 4px;
+    --slds-c-input-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 300;
+}
+
+lightning-button {
+    background-color: #1a73e8;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+lightning-button:hover {
+    background-color: #1669c1;
+}
+
+.section-heading {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-bottom: 0.5rem;
+    color: #202124;
+}
+
+.section-subheading {
+    font-size: small;
+    font-weight: 400;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    color: #202124;
+}
+
+.section-instruction {
+    font-size: small;
+    font-weight: 300;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    color: #ed0a0a;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+    background-color: #f44336;
+    z-index: 9999;
+    font-size: 16px;
+    animation: fadeInOut 4s forwards;
+    transition: background-color 0.3s ease;
+}
+
+.success {
+    background-color: #4CAF50;
+}
+
+.error {
+    background-color: #f44336;
+
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-20px); }
+}

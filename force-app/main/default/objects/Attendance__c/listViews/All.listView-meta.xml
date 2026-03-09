@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Start_Time__c</columns>
+    <columns>Start_Location__Latitude__s</columns>
+    <columns>Start_Location__Longitude__s</columns>
+    <columns>End_Time__c</columns>
+    <columns>End_Location__Latitude__s</columns>
+    <columns>End_Location__Longitude__s</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Sub Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Source_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Sub_Source</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Phone Call</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Social Media</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Namaste E-Mail ID</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Website</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>WhatsApp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Display Walk In</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Marketing Campaign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Advertisement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Employee - Direct Scanner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Expo Data</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Look Book Download</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Contact Form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Westeam Leads</controllingFieldValue>
+            <valueName>Reference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral Leads</controllingFieldValue>
+            <valueName>Architect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral Leads</controllingFieldValue>
+            <valueName>Builder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral Leads</controllingFieldValue>
+            <valueName>Contractor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral Leads</controllingFieldValue>
+            <valueName>Interior Designer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Referral Leads</controllingFieldValue>
+            <valueName>Engineer</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

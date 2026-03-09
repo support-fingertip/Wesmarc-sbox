@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Impressions__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Impressions</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Design &amp; Aesthetics</fullName>
+                <default>false</default>
+                <label>Design &amp; Aesthetics</label>
+            </value>
+            <value>
+                <fullName>German Engineering</fullName>
+                <default>false</default>
+                <label>German Engineering</label>
+            </value>
+            <value>
+                <fullName>Rebated Sound Proof Technology</fullName>
+                <default>false</default>
+                <label>Rebated Sound Proof Technology</label>
+            </value>
+            <value>
+                <fullName>Customization Option</fullName>
+                <default>false</default>
+                <label>Customization Option</label>
+            </value>
+            <value>
+                <fullName>Innovation in Mechanism</fullName>
+                <default>false</default>
+                <label>Innovation in Mechanism</label>
+            </value>
+            <value>
+                <fullName>Look, Feel &amp; Finish</fullName>
+                <default>false</default>
+                <label>Look, Feel &amp; Finish</label>
+            </value>
+            <value>
+                <fullName>All the above</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>All the above</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

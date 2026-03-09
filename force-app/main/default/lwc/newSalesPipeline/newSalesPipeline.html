@@ -1,0 +1,99 @@
+<template>
+    <template if:false={isModalOpen}>
+        <lightning-button label="New Sales Pipeline" onclick={openModal}></lightning-button>
+    </template>
+
+    <template if:true={isModalOpen}>
+        <lightning-card title="New Monthly Sales Pipeline">
+            <lightning-record-edit-form object-api-name="Sales_Funnel__c" onsuccess={handleSuccess} onerror={handleError}>
+                <lightning-messages></lightning-messages>
+
+                <section role="dialog" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Modal Header -->
+                        <header class="slds-modal__header">
+                            <h2 class="slds-modal__title">New Sales Pipeline</h2>
+                            <button class="slds-button slds-button_icon slds-modal__close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                            </button>
+                        </header>
+
+                        <!-- Modal Body -->
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <lightning-layout class="slds-box slds-theme_default slds-m-bottom_medium">
+                                <lightning-layout-item size="12">
+                                    <h3 class="slds-text-heading_small slds-m-bottom_small">Information</h3>
+
+                                    <div class="slds-grid slds-wrap">
+                                        <!-- Column 1 -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-2">
+                                            <lightning-input-field field-name="Lead__c" onchange={handleLeadChange}></lightning-input-field>
+                                        </div>
+
+                                        <!-- Column 2 -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <lightning-input-field field-name="Monthly_Sales_Pipeline_Number__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Project_Name__c"></lightning-input-field>
+                                            <lightning-input-field field-name="State__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Region__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Sales_Person_Name__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Project_Category__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Order_Staus__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Reason_for_Loosing_the_Order__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Opportunity__c"></lightning-input-field>
+                                        </div>
+
+                                        <!-- Column 3 -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <lightning-input-field field-name="Business_Clients__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Status__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Key_Account__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Customer_Name__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Order_Time_line_Time_Frame_Month__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Order_Time_line_Time_Frame_Year__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Sales_Funnel_Number__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Channel_Partner__c"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <!-- Section: Project Details -->
+                            <lightning-layout class="slds-box slds-theme_default">
+                                <lightning-layout-item size="12">
+                                    <h3 class="slds-text-heading_small slds-m-bottom_small">Project Details</h3>
+
+                                    <div class="slds-grid slds-wrap">
+                                        <!-- Column 1 -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <lightning-input-field field-name="Door_Application__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Door_Category__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Number_of_Doors__c"></lightning-input-field>
+                                        </div>
+
+                                        <!-- Column 2 -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <lightning-input-field field-name="Lead_Source__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Project_Site_Stage__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Previous_Month_Backlog__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Actual_Closed__c"></lightning-input-field>
+                                            <lightning-input-field field-name="Postpone_Door_Quality__c"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                            <lightning-button variant="brand" type="submit" label="Save"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </lightning-record-edit-form>
+        </lightning-card>
+    </template>
+</template>

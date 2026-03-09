@@ -1,0 +1,27 @@
+<aura:component controller="StartDayEndDayController" implements="force:lightningQuickActionWithoutHeader,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="isDisabled" type="boolean" default="false"/>
+    <aura:attribute name="attId" type="Object"/>
+    <aura:attribute name="StartTime" type="object" />
+    <aura:attribute name="EndTime" type="object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="slds-p-around_medium" style="width:200px;">
+        <aura:if isTrue="{!AND(v.attId.Start_Time__c, empty(v.attId.End_Time__c))}">
+            <lightning:button label="End Day" variant="brand" stretch="true" disabled="{!v.isDisabled}" onclick="{!c.handleEnd}"/>
+        </aura:if>
+        <aura:if isTrue="{!empty(v.attId)}">
+            <lightning:button label="Start Day" variant="brand" stretch="true" disabled="{!v.isDisabled}" onclick="{!c.handleStart}"/>
+        </aura:if>
+        
+    </div>
+    
+    <!-- spinner -->
+      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <aura:if isTrue="{!v.spinner}">
+            <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+        </aura:if>
+    </div>
+    
+</aura:component>

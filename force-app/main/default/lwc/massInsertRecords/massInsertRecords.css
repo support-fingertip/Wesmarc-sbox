@@ -1,0 +1,24 @@
+.scroll-container {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* for smooth mobile scrolling */
+}
+
+.fixed-table {
+    min-width: 1200px; /* total width for scrollability */
+    table-layout: fixed;
+    border-collapse: collapse;
+    height: auto;
+}
+
+.fixed-col {
+    width: 160px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.fixed-firstcol {
+    width: 60px;
+    word-wrap: break-word;
+    white-space: normal;
+}

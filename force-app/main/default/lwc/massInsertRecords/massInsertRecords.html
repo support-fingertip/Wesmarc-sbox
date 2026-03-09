@@ -1,0 +1,90 @@
+<template>
+    <lightning-card title="Mass Insert Custom Records">
+        <template if:true={isPicklistReady}>
+            <!-- Horizontal Scroll Wrapper -->
+            <div class="scroll-container" style="height:600px;">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer fixed-table">
+                    <thead>
+                        <tr>
+                            <th class="fixed-firstcol">SL No.</th>
+                            <th class="fixed-col">Lead</th>
+                            <th class="fixed-col">Account</th>
+                            <th class="fixed-col">Opportunity</th>
+                            <th class="fixed-col">Channel Partner</th>
+                            <th class="fixed-col">Sales Person</th>
+                            <th class="fixed-col">Business Clients</th>
+                            <th class="fixed-col">Project Category</th>
+                            <th class="fixed-col">Project Name</th>
+                            <th class="fixed-col">Project Site Stage</th>
+                            <th class="fixed-col">State</th>
+                            <th class="fixed-col">Status</th>
+                            <th class="fixed-col">Customer Name</th>
+                            <th class="fixed-col">Region</th>
+                            <th class="fixed-col">Order Status</th>
+                            <th class="fixed-col">Year</th>
+                            <th class="fixed-col">Month</th>
+                            <th class="fixed-col">Reason Lost</th>
+                            <th class="fixed-col">Door App</th>
+                            <th class="fixed-col">Door Category</th>
+                            <th class="fixed-col">Postpone Quality</th>
+                            <th class="fixed-col">No. of Doors</th>
+                            <th class="fixed-col">Lead Source</th>
+                            <th class="fixed-col">Backlog</th>
+                            <th class="fixed-col">Closed</th>
+                            <th class="fixed-col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={records} for:item="record" for:index="index">
+                            <tr key={record.id}>
+                                <td class="fixed-firstcol">{record.rowNumber}</td>
+                                <td class="fixed-col"><c-lookup-field object-api-name="Lead" label="" data-index={index} data-field="Lead__c" onlookupselected={handleLookupChange}></c-lookup-field></td>
+                                <td class="fixed-col"><c-lookup-field object-api-name="Account" label="" data-index={index} data-field="Key_Account__c" onlookupselected={handleLookupChange}></c-lookup-field></td>
+                                <td class="fixed-col"><c-lookup-field object-api-name="Opportunity" label="" data-index={index} data-field="Opportunity__c" onlookupselected={handleLookupChange}></c-lookup-field></td>
+                                <td class="fixed-col"><c-lookup-field object-api-name="Channel_Partner__c" label="" data-index={index} data-field="Channel_Partner__c" onlookupselected={handleLookupChange}></c-lookup-field></td>
+                                <td class="fixed-col"><c-lookup-field object-api-name="User" label="" data-index={index} data-field="Sales_Person_Name__c" onlookupselected={handleLookupChange}></c-lookup-field></td>
+
+                                <!-- Replace all comboboxes/texts/numbers like this -->
+                                <td class="fixed-col"><lightning-combobox value={record.Business_Clients__c} options={picklistOptions.businessClients} data-index={index} data-field="Business_Clients__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Project_Category__c} options={picklistOptions.projectCategory} data-index={index} data-field="Project_Category__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-input value={record.Project_Name__c} data-index={index} data-field="Project_Name__c" onchange={handleInputChange}></lightning-input></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Project_Site_Stage__c} options={picklistOptions.projectSiteStage} data-index={index} data-field="Project_Site_Stage__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.State__c} options={picklistOptions.state} data-index={index} data-field="State__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Status__c} options={picklistOptions.status} data-index={index} data-field="Status__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-input value={record.Customer_Name__c} data-index={index} data-field="Customer_Name__c" onchange={handleInputChange}></lightning-input></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Region__c} options={picklistOptions.region} data-index={index} data-field="Region__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Order_Staus__c} options={picklistOptions.orderStatus} data-index={index} data-field="Order_Staus__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Order_Time_line_Time_Frame_Year__c} options={picklistOptions.year} data-index={index} data-field="Order_Time_line_Time_Frame_Year__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Order_Time_line_Time_Frame_Month__c} options={picklistOptions.month} data-index={index} data-field="Order_Time_line_Time_Frame_Month__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Reason_for_Loosing_the_Order__c} options={picklistOptions.reasonLost} data-index={index} data-field="Reason_for_Loosing_the_Order__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Door_Application__c} options={picklistOptions.doorApp} data-index={index} data-field="Door_Application__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Door_Category__c} options={picklistOptions.doorCat} data-index={index} data-field="Door_Category__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-input type="number" value={record.Postpone_Door_Quality__c} data-index={index} data-field="Postpone_Door_Quality__c" onchange={handleInputChange}></lightning-input></td>
+                                <td class="fixed-col"><lightning-input type="number" value={record.Number_of_Doors__c} data-index={index} data-field="Number_of_Doors__c" onchange={handleInputChange}></lightning-input></td>
+                                <td class="fixed-col"><lightning-combobox value={record.Lead_Source__c} options={picklistOptions.leadSource} data-index={index} data-field="Lead_Source__c" onchange={handleInputChange}></lightning-combobox></td>
+                                <td class="fixed-col"><lightning-input type="number" value={record.Previous_Month_Backlog__c} data-index={index} data-field="Previous_Month_Backlog__c" onchange={handleInputChange}></lightning-input></td>
+                                <td class="fixed-col"><lightning-input type="number" value={record.Actual_Closed__c} data-index={index} data-field="Actual_Closed__c" onchange={handleInputChange}></lightning-input></td>
+                                
+                                <td class="fixed-col">
+                                    <lightning-button-icon icon-name="utility:add" title="Add" onclick={addRow}></lightning-button-icon>
+                                    <lightning-button-icon icon-name="utility:delete" title="Delete" data-index={index} onclick={handleDeleteRow} disabled={isSingleRow}></lightning-button-icon>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+                <lightning-button variant="neutral" label="Cancel" onclick={handleCancel} class="slds-m-left_small"></lightning-button>
+            </div>
+        </template>
+        <template if:false={isPicklistReady}>
+            <div class="slds-p-around_medium slds-align_absolute-center">
+                <lightning-spinner alternative-text="Loading picklist options..."></lightning-spinner>
+            </div>
+        </template>
+    </lightning-card>
+</template>

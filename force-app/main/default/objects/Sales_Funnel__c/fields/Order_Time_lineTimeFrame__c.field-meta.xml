@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Time_lineTimeFrame__c</fullName>
+    <externalId>false</externalId>
+    <label>Order Time line/ Time Frame</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1 TO 3 MONTH</fullName>
+                <default>false</default>
+                <label>1 TO 3 MONTH</label>
+            </value>
+            <value>
+                <fullName>3 TO 6 MONTH</fullName>
+                <default>false</default>
+                <label>3 TO 6 MONTH</label>
+            </value>
+            <value>
+                <fullName>6 TO 9 MONTH</fullName>
+                <default>false</default>
+                <label>6 TO 9 MONTH</label>
+            </value>
+            <value>
+                <fullName>9 TO 12 MONTH</fullName>
+                <default>false</default>
+                <label>9 TO 12 MONTH</label>
+            </value>
+            <value>
+                <fullName>12 to 15 MONTH</fullName>
+                <default>false</default>
+                <label>12 to 15 MONTH</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_for_Loosing_the_Order__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason for Loosing the Order</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Budget Issue</fullName>
+                <default>false</default>
+                <label>Budget Issue</label>
+            </value>
+            <value>
+                <fullName>CPL Veneer</fullName>
+                <default>false</default>
+                <label>CPL Veneer</label>
+            </value>
+            <value>
+                <fullName>Custom / Features</fullName>
+                <default>false</default>
+                <label>Custom / Features</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

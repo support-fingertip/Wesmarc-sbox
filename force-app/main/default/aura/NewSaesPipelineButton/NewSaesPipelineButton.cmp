@@ -1,0 +1,4 @@
+<aura:component implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName,flexipage:availableForRecordHome">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:newSalesPipeline recordId ="{!v.recordId}" isModalOpen="false"/>
+</aura:component>

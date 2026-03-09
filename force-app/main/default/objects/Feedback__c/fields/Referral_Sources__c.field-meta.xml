@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Referral_Sources__c</fullName>
+    <externalId>false</externalId>
+    <label>Referral Sources</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Instagram/Social Media</fullName>
+                <default>false</default>
+                <label>Instagram/Social Media</label>
+            </value>
+            <value>
+                <fullName>Google Search</fullName>
+                <default>false</default>
+                <label>Google Search</label>
+            </value>
+            <value>
+                <fullName>Architects</fullName>
+                <default>false</default>
+                <label>Architects</label>
+            </value>
+            <value>
+                <fullName>Builders</fullName>
+                <default>false</default>
+                <label>Builders</label>
+            </value>
+            <value>
+                <fullName>Interior Designers</fullName>
+                <default>false</default>
+                <label>Interior Designers</label>
+            </value>
+            <value>
+                <fullName>Delight Studio Store</fullName>
+                <default>false</default>
+                <label>Delight Studio Store</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

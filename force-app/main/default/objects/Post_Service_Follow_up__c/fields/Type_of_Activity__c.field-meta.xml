@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Activity__c</fullName>
+    <externalId>false</externalId>
+    <label>Type of Activity</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Installation Feedback</fullName>
+                <default>false</default>
+                <label>Installation Feedback</label>
+            </value>
+            <value>
+                <fullName>First Follow UP</fullName>
+                <default>false</default>
+                <label>First Follow UP</label>
+            </value>
+            <value>
+                <fullName>Second Follow UP</fullName>
+                <default>false</default>
+                <label>Second Follow UP</label>
+            </value>
+            <value>
+                <fullName>Third Follow UP</fullName>
+                <default>false</default>
+                <label>Third Follow UP</label>
+            </value>
+            <value>
+                <fullName>Fourth Follow UP</fullName>
+                <default>false</default>
+                <label>Fourth Follow UP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

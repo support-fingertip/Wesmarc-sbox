@@ -1,0 +1,87 @@
+<template>
+    <lightning-card>
+        <!--<template if:true={toast.show}>
+            <div class={toastClass}>{toast.message}</div>
+        </template>-->
+        <h1 class="section-heading">Customer Feedback Form - Wesmarc Delight Studio</h1>
+        <h6 class="section-subheading">We'd Love Your Feedback!</h6><hr/>
+        <h6 class="section-instruction">* indicates required question</h6>
+        <div class="slds-p-around_medium" if:true={qrImageUrl}>
+            <!-- Personal Information -->
+            <lightning-input label="Full Name" value={fullName} onchange={handleInputChange} required></lightning-input>
+            <lightning-input label="Mobile Number" type="tel" value={mobileNumber} onchange={handleInputChange} required></lightning-input>
+            <lightning-input label="Occupation" value={occupation} onchange={handleInputChange} ></lightning-input>
+            <lightning-input label="Email ID" type="email" value={email} onchange={handleInputChange} ></lightning-input>
+            <lightning-combobox label="City" value={city} options={cityOptions} onchange={handleInputChange} required></lightning-combobox>
+            <template if:true={showOtherCity}>
+                <lightning-input label="Please specify your City" value={otherCity} onchange={handleInputChange} required></lightning-input>
+            </template>
+
+            <div class="slds-m-top_medium">
+            <!-- Referral Source -->
+            <label class="slds-form-element__label">How did you hear about Wesmarc?</label>
+            <div class="slds-form-element__control">
+                <template if:true={showReferralCheckboxes}>
+                    <template for:each={referralOptions} for:item="option">
+                        <lightning-input type="checkbox" label={option.label} data-id={option.value} onchange={handleReferralChange} key={option.value}></lightning-input>
+                    </template>
+                    <template if:true={showOtherReferral}>
+                        <lightning-input label="Please specify other referral source" value={otherReferral} onchange={handleInputChange} required></lightning-input>
+                    </template>
+                </template>
+            </div>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <!-- Overall Studio Experience -->
+            <lightning-radio-group label="Rate the overall studio experience" options={experienceOptions} value={overallExperience} onchange={handleInputChange}></lightning-radio-group>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <h6 style="margin-left:0.25rem; margin-bottom:1rem">How would you rate the following</h6>
+            <!-- Detailed Ratings -->
+            <template for:each={detailedRatings} for:item="rating">
+                <lightning-radio-group label={rating.label} variant="label-inline" options={experienceOptions} value={rating.value} data-id={rating.name} onchange={handleDetailedRatingChange} key={rating.name}></lightning-radio-group>
+            </template>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <!-- Product Impression -->
+            <label class="slds-form-element__label">What impressed you the most about Wesmarc doors?</label>
+            <template if:true={showImpressionCheckboxes}>
+                <template for:each={impressionOptions} for:item="option">
+                    <lightning-input type="checkbox" label={option.label} data-id={option.value} onchange={handleImpressionChange} key={option.value}></lightning-input>
+                </template>
+            </template>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <!-- Recommendation Likelihood -->
+            <lightning-radio-group label="On a scale of 1 to 5, how likely are you to recommend Wesmarc to others?" options={recommendationOptions} value={recommendation} onchange={handleInputChange}></lightning-radio-group>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <!-- Purchase Intent -->
+            <lightning-radio-group label="Do you plan to buy Wesmarc doors for your home or project?" options={purchaseIntentOptions} value={purchaseIntent} onchange={handleInputChange}></lightning-radio-group>
+            </div>
+
+            <div class="slds-m-top_medium">
+            <!-- Suggestions -->
+            <lightning-textarea label="What could we improve at Wesmarc Delight Studios?" value={suggestions} onchange={handleInputChange}></lightning-textarea>
+            </div>
+
+            <template if:true={qrImageUrl}>
+                <label class="slds-align_absolute-center slds-p-around_medium slds-form-element__label" style="color:blue;font-size:large;"><b> Google Review</b> </label>
+                <div class="slds-align_absolute-center slds-p-around_medium" style="margin-top: -20px;">
+                    <img src={qrImageUrl} alt="QR Code" style="max-width: 200px;"/>
+                </div>
+                
+            </template>
+
+            <!-- Submit Button -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Submit" variant="brand" onclick={handleSubmit}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

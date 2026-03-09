@@ -1,0 +1,97 @@
+<template>
+    <div class="site-container">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="header-content">
+                <img src={wesmarkLogoUrl} alt="Wesmarc" class="header-logo" onerror={handleLogoError}/>
+                <h1 class="header-title">Wesmarc Customer Support</h1>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="site-body">
+            <template if:false={isSubmitted}>
+                <div class="form-container">
+                    <h2 class="form-heading">Report an Issue</h2>
+                    <p class="form-subheading">Please fill in the details below and we will get back to you shortly.</p>
+                    <hr class="form-divider"/>
+
+                    <div class="slds-p-around_medium">
+                        <lightning-input
+                            label="Name"
+                            value={customerName}
+                            data-field="customerName"
+                            onchange={handleInputChange}
+                            required
+                            placeholder="Enter your full name">
+                        </lightning-input>
+
+                        <lightning-input
+                            label="Mobile Number"
+                            type="tel"
+                            value={mobileNumber}
+                            data-field="mobileNumber"
+                            onchange={handleInputChange}
+                            required
+                            pattern="[0-9]{10}"
+                            message-when-pattern-mismatch="Please enter a valid 10-digit mobile number"
+                            placeholder="Enter 10-digit mobile number">
+                        </lightning-input>
+
+                        <lightning-textarea
+                            label="Address"
+                            value={address}
+                            data-field="address"
+                            onchange={handleInputChange}
+                            required
+                            placeholder="Enter your complete address">
+                        </lightning-textarea>
+
+                        <lightning-textarea
+                            label="Issue Details"
+                            value={issueDetails}
+                            data-field="issueDetails"
+                            onchange={handleInputChange}
+                            required
+                            placeholder="Describe the issue you are facing">
+                        </lightning-textarea>
+
+                        <div class="button-container slds-m-top_large">
+                            <lightning-button
+                                variant="brand"
+                                label="Submit"
+                                onclick={handleSubmit}
+                                disabled={isLoading}>
+                            </lightning-button>
+                            <template if:true={isLoading}>
+                                <lightning-spinner alternative-text="Submitting..." size="small" class="slds-m-left_small"></lightning-spinner>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={isSubmitted}>
+                <div class="success-container">
+                    <div class="success-icon">&#10004;</div>
+                    <h2 class="success-heading">Thank You!</h2>
+                    <p class="success-message">Your issue has been submitted successfully. Our Sales Support Team will review and get back to you shortly.</p>
+                    <p class="success-reference">Reference Number: <strong>{caseNumber}</strong></p>
+                    <lightning-button
+                        variant="brand"
+                        label="Submit Another Issue"
+                        onclick={handleReset}
+                        class="slds-m-top_large">
+                    </lightning-button>
+                </div>
+            </template>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <img src={wesmarkLogoUrl} alt="Wesmarc" class="footer-logo" onerror={handleLogoError}/>
+            </div>
+        </footer>
+    </div>
+</template>
