@@ -37,6 +37,9 @@ public without sharing class CustomerCaseController {
                 newCase.OwnerId = queues[0].Id;
             }
 
+            Database.DMLOptions dmo = new Database.DMLOptions();
+            dmo.assignmentRuleHeader.useDefaultRule = false;
+            newCase.setOptions(dmo);
             insert newCase;
 
             Case createdCase = [SELECT CaseNumber FROM Case WHERE Id = :newCase.Id LIMIT 1];
@@ -80,6 +83,9 @@ public without sharing class CustomerCaseController {
                 newCase.OwnerId = queues[0].Id;
             }
 
+            Database.DMLOptions dmo = new Database.DMLOptions();
+            dmo.assignmentRuleHeader.useDefaultRule = false;
+            newCase.setOptions(dmo);
             insert newCase;
             return newCase.Id;
         } catch (Exception e) {

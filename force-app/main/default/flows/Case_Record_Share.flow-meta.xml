@@ -93,6 +93,14 @@
         <connector>
             <targetReference>Update_Owner</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CreatedById</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>0057200000Be4jJAAR</stringValue>
+            </value>
+        </filters>
         <object>Case</object>
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>

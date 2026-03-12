@@ -15,7 +15,6 @@ export default class CustomerCaseForm extends LightningElement {
     }
 
     handleLogoError(event) {
-        // Hide broken image if logo resource is not yet uploaded
         event.target.style.display = 'none';
     }
 
@@ -33,7 +32,6 @@ export default class CustomerCaseForm extends LightningElement {
     }
 
     handleSubmit() {
-        // Validate all required fields
         const allValid = [...this.template.querySelectorAll('lightning-input, lightning-textarea')]
             .reduce((validSoFar, inputCmp) => {
                 inputCmp.reportValidity();
@@ -45,7 +43,6 @@ export default class CustomerCaseForm extends LightningElement {
         }
 
         this.isLoading = true;
-
         createCase({
             customerName: this.customerName,
             mobileNumber: this.mobileNumber,
@@ -59,8 +56,6 @@ export default class CustomerCaseForm extends LightningElement {
             })
             .catch(error => {
                 this.isLoading = false;
-                console.error('Error creating case:', error);
-                // Show inline error since ShowToastEvent may not work on public sites
                 const errorMsg = error.body ? error.body.message : 'An error occurred. Please try again.';
                 alert(errorMsg);
             });
