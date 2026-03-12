@@ -18,9 +18,13 @@ public without sharing class CustomerCaseController {
         errorMessage = '';
         try {
             // Get the Sales Support Team queue
-            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team' LIMIT 1];
+            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team1' LIMIT 1];
+
+            // Get the Customer Support record type
+            Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
 
             Case newCase = new Case();
+            newCase.RecordTypeId = recordTypeId;
             newCase.Subject = 'Customer Issue - ' + String.escapeSingleQuotes(customerName);
             newCase.SuppliedName = customerName;
             newCase.SuppliedPhone = mobileNumber;
@@ -37,9 +41,9 @@ public without sharing class CustomerCaseController {
                 newCase.OwnerId = queues[0].Id;
             }
 
-            Database.DMLOptions dmo = new Database.DMLOptions();
-            dmo.assignmentRuleHeader.useDefaultRule = false;
-            newCase.setOptions(dmo);
+          
+
+
             insert newCase;
 
             Case createdCase = [SELECT CaseNumber FROM Case WHERE Id = :newCase.Id LIMIT 1];
@@ -65,9 +69,13 @@ public without sharing class CustomerCaseController {
     @AuraEnabled
     public static String createCase(String customerName, String mobileNumber, String address, String issueDetails) {
         try {
-            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team' LIMIT 1];
+            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team1' LIMIT 1];
+
+            // Get the Customer Support record type
+            Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
 
             Case newCase = new Case();
+            newCase.RecordTypeId = recordTypeId;
             newCase.Subject = 'Customer Issue - ' + customerName;
             newCase.SuppliedName = customerName;
             newCase.SuppliedPhone = mobileNumber;
