@@ -3,8 +3,11 @@
         <!-- Header -->
         <header class="site-header">
             <div class="header-content">
-                <img src={wesmarkLogoUrl} alt="Wesmarc" class="header-logo" onerror={handleLogoError}/>
-                <h1 class="header-title">Wesmarc Customer Support</h1>
+                <img src={wesmarkLogoUrl} alt="Wesmarc Logo" class="header-logo" onerror={handleLogoError} />
+                <div>
+                    <h1 class="header-title">Wesmarc Customer Support</h1>
+                    <p class="header-subtitle">Prompt, Professional Service — Anytime</p>
+                </div>
             </div>
         </header>
 
@@ -13,19 +16,18 @@
             <template if:false={isSubmitted}>
                 <div class="form-container">
                     <h2 class="form-heading">Report an Issue</h2>
-                    <p class="form-subheading">Please fill in the details below and we will get back to you shortly.</p>
+                    <p class="form-subheading">Please fill out your details and our team will contact you soon.</p>
                     <hr class="form-divider"/>
-
-                    <div class="slds-p-around_medium">
+                    <div class="form-fields">
                         <lightning-input
                             label="Name"
                             value={customerName}
                             data-field="customerName"
                             onchange={handleInputChange}
                             required
-                            placeholder="Enter your full name">
-                        </lightning-input>
-
+                            placeholder="Enter your full name"
+                            class="input-decor"
+                        ></lightning-input>
                         <lightning-input
                             label="Mobile Number"
                             type="tel"
@@ -35,54 +37,54 @@
                             required
                             pattern="[0-9]{10}"
                             message-when-pattern-mismatch="Please enter a valid 10-digit mobile number"
-                            placeholder="Enter 10-digit mobile number">
-                        </lightning-input>
-
+                            placeholder="Enter 10-digit mobile number"
+                            class="input-decor"
+                        ></lightning-input>
                         <lightning-textarea
                             label="Address"
                             value={address}
                             data-field="address"
                             onchange={handleInputChange}
                             required
-                            placeholder="Enter your complete address">
-                        </lightning-textarea>
-
+                            placeholder="Enter your complete address"
+                            class="input-decor"
+                        ></lightning-textarea>
                         <lightning-textarea
                             label="Issue Details"
                             value={issueDetails}
                             data-field="issueDetails"
                             onchange={handleInputChange}
                             required
-                            placeholder="Describe the issue you are facing">
-                        </lightning-textarea>
-
-                        <div class="button-container slds-m-top_large">
+                            placeholder="Describe the issue you are facing"
+                            class="input-decor"
+                        ></lightning-textarea>
+                        <div class="button-container">
                             <lightning-button
                                 variant="brand"
                                 label="Submit"
                                 onclick={handleSubmit}
-                                disabled={isLoading}>
-                            </lightning-button>
+                                disabled={isLoading}
+                                class="submit-btn"
+                            ></lightning-button>
                             <template if:true={isLoading}>
-                                <lightning-spinner alternative-text="Submitting..." size="small" class="slds-m-left_small"></lightning-spinner>
+                                <lightning-spinner alternative-text="Submitting..." size="small"></lightning-spinner>
                             </template>
                         </div>
                     </div>
                 </div>
             </template>
-
             <template if:true={isSubmitted}>
                 <div class="success-container">
                     <div class="success-icon">&#10004;</div>
                     <h2 class="success-heading">Thank You!</h2>
-                    <p class="success-message">Your issue has been submitted successfully. Our Sales Support Team will review and get back to you shortly.</p>
-                    <p class="success-reference">Reference Number: <strong>{caseNumber}</strong></p>
+                    <p class="success-message">Your issue is submitted. Our team will contact you shortly.</p>
+                    <p class="success-reference">Case Reference: <strong>{caseNumber}</strong></p>
                     <lightning-button
                         variant="brand"
                         label="Submit Another Issue"
                         onclick={handleReset}
-                        class="slds-m-top_large">
-                    </lightning-button>
+                        class="slds-m-top_large"
+                    ></lightning-button>
                 </div>
             </template>
         </main>
@@ -90,7 +92,11 @@
         <!-- Footer -->
         <footer class="site-footer">
             <div class="footer-content">
-                <img src={wesmarkLogoUrl} alt="Wesmarc" class="footer-logo" onerror={handleLogoError}/>
+                <img src={wesmarkLogoUrl} alt="Wesmarc Logo" class="footer-logo" onerror={handleLogoError} />
+                <div class="footer-details">
+                    <p class="footer-text">&copy; 2026 Wesmarc Pvt Ltd.</p>
+                    <p class="footer-contact"><a href="mailto:support@wesmarc.com">support@wesmarc.com</a></p>
+                </div>
             </div>
         </footer>
     </div>

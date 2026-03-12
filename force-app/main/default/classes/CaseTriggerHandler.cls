@@ -24,22 +24,52 @@ public class CaseTriggerHandler {
         for(Case c : caseList) {
             caseIdSet.add(c.Id);
         }
-        sendNotificationToUser(caseIdSet);
 
-        // Notify all active queue members when the Case owner is a queue
-        Set<Id> queueMemberIds = getQueueMemberUserIds(caseIdSet);
-        if (!queueMemberIds.isEmpty()) {
-            CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
-            Set<String> userIdStrings = new Set<String>();
-            for (Id uid : queueMemberIds) {
-                userIdStrings.add(String.valueOf(uid));
+        // Split cases by record type
+        Id customerSupportRTId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
+        Set<Id> customerSupportCaseIds = new Set<Id>();
+        Set<Id> otherCaseIds = new Set<Id>();
+        for (Case c : caseList) {
+            if (c.RecordTypeId == customerSupportRTId) {
+                customerSupportCaseIds.add(c.Id);
+            } else {
+                otherCaseIds.add(c.Id);
             }
-            for (Id caseId : caseIdSet) {
-                String title = 'New Case in your queue';
-                String body  = 'A new Case has been created and assigned to your queue. Click to view.';
-                SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, userIdStrings);
+        }
+
+        // For non-Customer Support record types, use the default notification
+        if (!otherCaseIds.isEmpty()) {
+            sendNotificationToUser(otherCaseIds);
+        }
+
+        // For Customer Support record type, notify queue members and user owners
+        if (!customerSupportCaseIds.isEmpty()) {
+            // Notify all active queue members when the Case owner is a queue
+            Set<Id> queueMemberIds = getQueueMemberUserIds(customerSupportCaseIds);
+            if (!queueMemberIds.isEmpty()) {
+                CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
+                Set<String> userIdStrings = new Set<String>();
+                for (Id uid : queueMemberIds) {
+                    userIdStrings.add(String.valueOf(uid));
+                }
+                for (Id caseId : customerSupportCaseIds) {
+                    String title = 'New Case in your queue';
+                    String body  = 'A new Case has been created and assigned to your queue. Click to view.';
+                    SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, userIdStrings);
+                }
+              CaseQueueNotificationService.sendEmailToQueueMembers(customerSupportCaseIds, queueMemberIds);
             }
-            CaseQueueNotificationService.sendEmailToQueueMembers(caseIdSet, queueMemberIds);
+
+            // Notify Case owner if the owner is a User (not a Queue)
+            for (Case c : caseList) {
+                if (c.RecordTypeId == customerSupportRTId && c.OwnerId.getSObjectType() == User.SObjectType) {
+                    CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
+                    Set<String> ownerSet = new Set<String>{ String.valueOf(c.OwnerId) };
+                    String title = 'New Case assigned to you';
+                    String body  = 'A new Case has been created and assigned to you. Click to view.';
+                    SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, c.Id, ownerSet);
+                }
+            }
         }
     }
     
@@ -74,6 +104,19 @@ public class CaseTriggerHandler {
                     SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, userIdStrings);
                 }
                 CaseQueueNotificationService.sendEmailToQueueMembers(changedStatusCaseIds, queueMemberIds);
+            }
+
+            // Notify Case owner if the owner is a User (not a Queue)
+            Map<Id, Case> caseMapForOwner = new Map<Id, Case>(caseList);
+            for (Id caseId : changedStatusCaseIds) {
+                Case c = caseMapForOwner.get(caseId);
+                if (c != null && c.OwnerId.getSObjectType() == User.SObjectType) {
+                    CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
+                    Set<String> ownerSet = new Set<String>{ String.valueOf(c.OwnerId) };
+                    String title = 'Case status updated: ' + c.Status;
+                    String body  = 'Status of a Case assigned to you has changed to ' + c.Status + '. Click to view.';
+                    SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, ownerSet);
+                }
             }
         }
     }
@@ -110,7 +153,7 @@ public class CaseTriggerHandler {
     private static Set<Id> getQueueMemberUserIds(Set<Id> caseIds) {
         Set<Id> queueIds = new Set<Id>();
         for (Case c : [SELECT OwnerId FROM Case WHERE Id IN :caseIds
-                        AND OwnerId IN (SELECT Id FROM Group WHERE Type = 'Queue')]) {
+                        AND OwnerId IN (SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team1')]) {
             queueIds.add(c.OwnerId);
         }
         if (queueIds.isEmpty()) {

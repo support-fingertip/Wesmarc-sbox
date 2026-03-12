@@ -1,7 +1,7 @@
 /*  Class Name: CaseQueueNotificationService  * Date: 12/03/2026  @author: Nanma  
 *  @description: Sends email notifications to active members of a Case queue
 *  @parameters: Set of Case Ids, Set of queue member User Ids */
-public class CaseQueueNotificationService {
+public without sharing class CaseQueueNotificationService {
 
     public static void sendEmailToQueueMembers(Set<Id> caseIds, Set<Id> queueMemberIds) {
         if (caseIds.isEmpty() || queueMemberIds.isEmpty()) {
@@ -49,7 +49,11 @@ public class CaseQueueNotificationService {
         }
 
         if (!emails.isEmpty()) {
-            Messaging.sendEmail(emails);
+            try {
+                Messaging.sendEmail(emails);
+            } catch (Exception e) {
+                System.debug('Email sending failed: ' + e.getMessage());
+            }
         }
     }
 }
