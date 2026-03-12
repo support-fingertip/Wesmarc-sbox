@@ -7,6 +7,7 @@ public class CaseTriggerHandler {
 * Ver |   Author      |   Date        |   Description 
 * ----------------------------------------------------------------------------- 
 * 1.0 |   Nachiketha  |  21-4-2025 |   Initial version      
+* 2.0 |   Nanma       |  12-03-2026  |   Queue member in-app + email notifications
 * -------------------------------------------------------------------
 **************************************************************** */    
     
@@ -24,21 +25,61 @@ public class CaseTriggerHandler {
             caseIdSet.add(c.Id);
         }
         sendNotificationToUser(caseIdSet);
+
+        // Notify all active queue members when the Case owner is a queue
+        Set<Id> queueMemberIds = getQueueMemberUserIds(caseIdSet);
+        if (!queueMemberIds.isEmpty()) {
+            CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
+            Set<String> userIdStrings = new Set<String>();
+            for (Id uid : queueMemberIds) {
+                userIdStrings.add(String.valueOf(uid));
+            }
+            for (Id caseId : caseIdSet) {
+                String title = 'New Case in your queue';
+                String body  = 'A new Case has been created and assigned to your queue. Click to view.';
+                SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, userIdStrings);
+            }
+            CaseQueueNotificationService.sendEmailToQueueMembers(caseIdSet, queueMemberIds);
+        }
     }
     
- /*  Method Name: caseUpdate  * Date: 9/05/2025  @author: Nanma  * @description: send notification tocase owner * @parameters: case list */
+ /*  Method Name: caseAfterUpdate  * Date: 9/05/2025  @author: Nanma  * @description: send notification to case owner and queue members on status change * @parameters: case list */
     public static void caseAfterUpdate(List<Case> caseList, map<Id,case> oldcaseMap) {
         map<Id,string> caseIdOwnerMap = New map<Id,string> ();
+        Set<Id> changedStatusCaseIds = new Set<Id>();
         for(Case c : caseList) {
             if(c.Status =='Closed' && c.Status != oldcaseMap.get(c.Id).Status){
                caseIdOwnerMap.put(c.Id,c.CreatedById); 
             }
+            if(c.Status != oldcaseMap.get(c.Id).Status){
+                changedStatusCaseIds.add(c.Id);
+            }
         }
-       sendNotificationToCaseCreatedBy(caseIdOwnerMap);
+        sendNotificationToCaseCreatedBy(caseIdOwnerMap);
+
+        // Notify all active queue members when Case status changes
+        if (!changedStatusCaseIds.isEmpty()) {
+            Set<Id> queueMemberIds = getQueueMemberUserIds(changedStatusCaseIds);
+            if (!queueMemberIds.isEmpty()) {
+                CustomNotificationType notifType = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Record_Creation_Notification' LIMIT 1];
+                Set<String> userIdStrings = new Set<String>();
+                for (Id uid : queueMemberIds) {
+                    userIdStrings.add(String.valueOf(uid));
+                }
+                Map<Id, Case> caseMap = new Map<Id, Case>(caseList);
+                for (Id caseId : changedStatusCaseIds) {
+                    Case c = caseMap.get(caseId);
+                    String title = 'Case status updated: ' + c.Status;
+                    String body  = 'Status of a Case in your queue has changed to ' + c.Status + '. Click to view.';
+                    SendNotification.sendNotification(body, title, UserInfo.getUserId(), notifType.Id, caseId, userIdStrings);
+                }
+                CaseQueueNotificationService.sendEmailToQueueMembers(changedStatusCaseIds, queueMemberIds);
+            }
+        }
     }
        
     
-  public static void sendNotificationToCaseCreatedBy(map<Id,string> caseIdOwnerMap) {
+    public static void sendNotificationToCaseCreatedBy(map<Id,string> caseIdOwnerMap) {
         Set<string> userIds =new Set<string>();
         CustomNotificationType type = [SELECT Id FROM CustomNotificationType WHERE DeveloperName ='Record_Creation_Notification'];
         for(string recId :caseIdOwnerMap.keyset()){
@@ -48,12 +89,6 @@ public class CaseTriggerHandler {
             userIds.clear(); 
         }
     } 
-    
-    
-    
-    
-    
-    
     
     public static void sendNotificationToUser(Set<Id> caseIdSet) {
         Set<string> userIds =new Set<string>();
@@ -66,5 +101,26 @@ public class CaseTriggerHandler {
             SendNotification.sendNotification('New Case Assigned To you',title,userinfo.getUserId(),type.Id, recId, userIds);
             userIds.clear(); 
         }
+    }
+
+    /*  Method Name: getQueueMemberUserIds  * Date: 12/03/2026  @author: Nanma
+     *  @description: Returns active User Ids who are members of the queue(s) owning the given Cases
+     *  @parameters: Set of Case Ids */
+    @TestVisible
+    private static Set<Id> getQueueMemberUserIds(Set<Id> caseIds) {
+        Set<Id> queueIds = new Set<Id>();
+        for (Case c : [SELECT OwnerId FROM Case WHERE Id IN :caseIds
+                        AND OwnerId IN (SELECT Id FROM Group WHERE Type = 'Queue')]) {
+            queueIds.add(c.OwnerId);
+        }
+        if (queueIds.isEmpty()) {
+            return new Set<Id>();
+        }
+        Map<Id, User> userMap = new Map<Id, User>(
+            [SELECT Id FROM User
+             WHERE Id IN (SELECT UserOrGroupId FROM GroupMember WHERE GroupId IN :queueIds)
+             AND IsActive = true]
+        );
+        return new Set<Id>(userMap.keySet());
     }
 }
