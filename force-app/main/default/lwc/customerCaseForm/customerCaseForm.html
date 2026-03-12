@@ -28,19 +28,17 @@
                             placeholder="Enter your full name"
                             class="input-decor"
                         ></lightning-input>
-                        <lightning-input
-                            label="Mobile Number"
-                            type="tel"
-                            value={mobileNumber}
-                            data-field="mobileNumber"
-                            onchange={handleInputChange}
-                            required
-                            pattern="[6-9][0-9]{9}"
-                            max-length="10"
-                            message-when-pattern-mismatch="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
-                            placeholder="Enter 10-digit mobile number"
-                            class="input-decor"
-                        ></lightning-input>
+   <lightning-input
+    label="Mobile Number"
+    type="tel"
+    value={mobileNumber}
+    data-field="mobileNumber"
+    oninput={handleInputChange}
+    required
+    maxlength="10"
+    placeholder="Enter 10-digit mobile number"
+    class="input-decor"
+></lightning-input>
                         <lightning-textarea
                             label="Address"
                             value={address}
