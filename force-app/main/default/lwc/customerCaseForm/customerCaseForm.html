@@ -35,8 +35,9 @@
                             data-field="mobileNumber"
                             onchange={handleInputChange}
                             required
-                            pattern="[0-9]{10}"
-                            message-when-pattern-mismatch="Please enter a valid 10-digit mobile number"
+                            pattern="[6-9][0-9]{9}"
+                            max-length="10"
+                            message-when-pattern-mismatch="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
                             placeholder="Enter 10-digit mobile number"
                             class="input-decor"
                         ></lightning-input>
@@ -50,7 +51,7 @@
                             class="input-decor"
                         ></lightning-textarea>
                         <lightning-textarea
-                            label="Issue Details"
+                            label="Nature of Support"
                             value={issueDetails}
                             data-field="issueDetails"
                             onchange={handleInputChange}
@@ -63,7 +64,7 @@
                                 variant="brand"
                                 label="Submit"
                                 onclick={handleSubmit}
-                                disabled={isLoading}
+                                disabled={isSubmitting}
                                 class="submit-btn"
                             ></lightning-button>
                             <template if:true={isLoading}>
