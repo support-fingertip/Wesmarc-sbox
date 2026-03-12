@@ -31,20 +31,37 @@ public without sharing class CaseQueueNotificationService {
             toAddresses.add(u.Email);
         }
 
+        // Query the Org-Wide Email Address (Wesmark Support)
+        Id orgWideEmailId = null;
+        List<OrgWideEmailAddress> orgWideAddresses = [
+            SELECT Id
+            FROM OrgWideEmailAddress
+            WHERE DisplayName = 'Wesmark Support'
+            LIMIT 1
+        ];
+        if (!orgWideAddresses.isEmpty()) {
+            orgWideEmailId = orgWideAddresses[0].Id;
+        }
+
+        String baseUrl = URL.getOrgDomainURL().toExternalForm();
+
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
 
         for (Case c : cases) {
+            String caseUrl = baseUrl + '/lightning/r/Case/' + c.Id + '/view';
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             mail.setToAddresses(toAddresses);
-            mail.setSubject('Case ' + c.CaseNumber + ' in your queue (' + c.Status + ')');
-            mail.setPlainTextBody(
-                'A case assigned to your queue has changed.\n\n' +
-                'Case Number: ' + c.CaseNumber + '\n' +
-                'Subject: ' + (c.Subject != null ? c.Subject : '') + '\n' +
-                'Status: ' + c.Status + '\n\n' +
-                'Please log into Salesforce for more details.'
+            mail.setSubject('Customer Complaint ' + c.CaseNumber + ' Assigned');
+            mail.setHtmlBody(
+                '<p>Case ' + String.escapeHtml4(c.CaseNumber) + ' has been assigned to you. '
+                + 'Please check and resolve the issue ASAP.</p>'
+                + '<p>Please click on the link below to view the record.</p>'
+                + '<p><a href="' + String.escapeHtml4(caseUrl) + '">' + String.escapeHtml4(caseUrl) + '</a></p>'
             );
             mail.setSaveAsActivity(false);
+            if (orgWideEmailId != null) {
+                mail.setOrgWideEmailAddressId(orgWideEmailId);
+            }
             emails.add(mail);
         }
 
