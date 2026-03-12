@@ -8,6 +8,7 @@ export default class CustomerCaseForm extends LightningElement {
     @track issueDetails = '';
     @track isSubmitted = false;
     @track isLoading = false;
+    @track isSubmitting = false;
     @track caseNumber = '';
 
     get wesmarkLogoUrl() {
@@ -23,7 +24,12 @@ export default class CustomerCaseForm extends LightningElement {
         if (field === 'customerName') {
             this.customerName = event.target.value;
         } else if (field === 'mobileNumber') {
-            this.mobileNumber = event.target.value;
+            let value = event.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            this.mobileNumber = value;
+            event.target.value = value;
         } else if (field === 'address') {
             this.address = event.target.value;
         } else if (field === 'issueDetails') {
@@ -31,7 +37,27 @@ export default class CustomerCaseForm extends LightningElement {
         }
     }
 
+    validateMobileNumber() {
+        const mobileInput = this.template.querySelector('[data-field="mobileNumber"]');
+        if (mobileInput) {
+            const regex = /^[6-9][0-9]{9}$/;
+            if (!regex.test(this.mobileNumber)) {
+                mobileInput.setCustomValidity('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
+            } else {
+                mobileInput.setCustomValidity('');
+            }
+            mobileInput.reportValidity();
+            return regex.test(this.mobileNumber);
+        }
+        return false;
+    }
+
     handleSubmit() {
+        alert('hi');
+        if (this.isSubmitting) {
+            return;
+        }
+
         const allValid = [...this.template.querySelectorAll('lightning-input, lightning-textarea')]
             .reduce((validSoFar, inputCmp) => {
                 inputCmp.reportValidity();
@@ -42,6 +68,11 @@ export default class CustomerCaseForm extends LightningElement {
             return;
         }
 
+        if (!this.validateMobileNumber()) {
+            return;
+        }
+
+        this.isSubmitting = true;
         this.isLoading = true;
         createCase({
             customerName: this.customerName,
@@ -56,6 +87,7 @@ export default class CustomerCaseForm extends LightningElement {
             })
             .catch(error => {
                 this.isLoading = false;
+                this.isSubmitting = false;
                 const errorMsg = error.body ? error.body.message : 'An error occurred. Please try again.';
                 alert(errorMsg);
             });
@@ -67,6 +99,7 @@ export default class CustomerCaseForm extends LightningElement {
         this.address = '';
         this.issueDetails = '';
         this.isSubmitted = false;
+        this.isSubmitting = false;
         this.caseNumber = '';
     }
 }

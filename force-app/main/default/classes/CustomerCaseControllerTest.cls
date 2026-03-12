@@ -49,15 +49,13 @@ private class CustomerCaseControllerTest {
     @isTest
     static void testCreateCaseWithEmptyFields() {
         Test.startTest();
-        String caseId = CustomerCaseController.createCase(
-            '',
-            '',
-            '',
-            ''
-        );
+        try {
+            CustomerCaseController.createCase('', '', '', '');
+            System.assert(false, 'Expected AuraHandledException for empty mobile number');
+        } catch (AuraHandledException e) {
+            System.assert(e.getMessage() != null, 'Should throw validation error for empty mobile number');
+        }
         Test.stopTest();
-
-        System.assertNotEquals(null, caseId, 'Case Id should not be null even with empty fields');
     }
 
     @isTest

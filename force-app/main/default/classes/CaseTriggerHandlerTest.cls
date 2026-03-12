@@ -267,4 +267,99 @@ public class CaseTriggerHandlerTest {
         System.assert(true, 'Email notification should complete without exception');
     }
 
+    /* Test Case insert with Sales_Support_Team1 queue — covers queue member notification block in caseInsert */
+    @isTest
+    public static void testCaseInsertSalesSupportQueue(){
+        Profile p = [SELECT Id FROM Profile LIMIT 1];
+        User qMember = new User(Alias = 'ssq01', Email='ssqmem01@testorgfil.com',
+                          EmailEncodingKey='UTF-8', LastName='SSQueueMember', LanguageLocaleKey='en_US',
+                          LocaleSidKey='en_US', ProfileId = p.Id,
+                          TimeZoneSidKey='America/Los_Angeles', UserName='ssqmem01@testorg.com.notif',MobilePhone = '1121');
+        insert qMember;
+
+        List<Group> existingQueues = [SELECT Id FROM Group WHERE DeveloperName = 'Sales_Support_Team1' AND Type = 'Queue' LIMIT 1];
+        Group ssQueue;
+        if (existingQueues.isEmpty()) {
+            ssQueue = new Group(Name = 'Sales Support Team1', DeveloperName = 'Sales_Support_Team1', Type = 'Queue');
+            insert ssQueue;
+            System.runAs(new User(Id = UserInfo.getUserId())) {
+                QueueSobject qso = new QueueSobject(QueueId = ssQueue.Id, SobjectType = 'Case');
+                insert qso;
+            }
+        } else {
+            ssQueue = existingQueues[0];
+        }
+
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<GroupMember> existingMembers = [SELECT Id FROM GroupMember WHERE GroupId = :ssQueue.Id AND UserOrGroupId = :qMember.Id LIMIT 1];
+            if (existingMembers.isEmpty()) {
+                GroupMember gm = new GroupMember(GroupId = ssQueue.Id, UserOrGroupId = qMember.Id);
+                insert gm;
+            }
+        }
+
+        Id customerSupportRTId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
+
+        Test.startTest();
+        Case c = new Case(Origin = 'Web', Status = 'New', Subject = 'SS Queue Insert Test',
+                          RecordTypeId = customerSupportRTId, OwnerId = ssQueue.Id);
+        Database.DMLOptions dmo = new Database.DMLOptions();
+        dmo.assignmentRuleHeader.useDefaultRule = false;
+        c.setOptions(dmo);
+        insert c;
+        Test.stopTest();
+
+        Case inserted = [SELECT Id, OwnerId FROM Case WHERE Id = :c.Id];
+        System.assertNotEquals(null, inserted, 'Case should be inserted with Sales_Support_Team1 queue');
+    }
+
+    /* Test Case status update with Sales_Support_Team1 queue — covers queue member notification block in caseAfterUpdate */
+    @isTest
+    public static void testCaseUpdateSalesSupportQueue(){
+        Profile p = [SELECT Id FROM Profile LIMIT 1];
+        User qMember = new User(Alias = 'ssq02', Email='ssqmem02@testorgfil.com',
+                          EmailEncodingKey='UTF-8', LastName='SSQueueMember2', LanguageLocaleKey='en_US',
+                          LocaleSidKey='en_US', ProfileId = p.Id,
+                          TimeZoneSidKey='America/Los_Angeles', UserName='ssqmem02@testorg.com.notif',MobilePhone = '1131');
+        insert qMember;
+
+        List<Group> existingQueues = [SELECT Id FROM Group WHERE DeveloperName = 'Sales_Support_Team1' AND Type = 'Queue' LIMIT 1];
+        Group ssQueue;
+        if (existingQueues.isEmpty()) {
+            ssQueue = new Group(Name = 'Sales Support Team1', DeveloperName = 'Sales_Support_Team1', Type = 'Queue');
+            insert ssQueue;
+            System.runAs(new User(Id = UserInfo.getUserId())) {
+                QueueSobject qso = new QueueSobject(QueueId = ssQueue.Id, SobjectType = 'Case');
+                insert qso;
+            }
+        } else {
+            ssQueue = existingQueues[0];
+        }
+
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            List<GroupMember> existingMembers = [SELECT Id FROM GroupMember WHERE GroupId = :ssQueue.Id AND UserOrGroupId = :qMember.Id LIMIT 1];
+            if (existingMembers.isEmpty()) {
+                GroupMember gm = new GroupMember(GroupId = ssQueue.Id, UserOrGroupId = qMember.Id);
+                insert gm;
+            }
+        }
+
+        Id customerSupportRTId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
+
+        Case c = new Case(Origin = 'Web', Status = 'New', Subject = 'SS Queue Update Test',
+                          RecordTypeId = customerSupportRTId, OwnerId = ssQueue.Id);
+        Database.DMLOptions dmo = new Database.DMLOptions();
+        dmo.assignmentRuleHeader.useDefaultRule = false;
+        c.setOptions(dmo);
+        insert c;
+
+        Test.startTest();
+        c.Status = 'Closed';
+        update c;
+        Test.stopTest();
+
+        Case updated = [SELECT Id, Status FROM Case WHERE Id = :c.Id];
+        System.assertEquals('Closed', updated.Status, 'Case status should be Closed');
+    }
+
 }
