@@ -27,25 +27,19 @@
 
 .header-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 1rem;
 }
 
 .header-logo {
-    height: 50px;
-    margin-right: 1rem;
+    height: 80px;
 }
 
 .header-title {
     color: #ffffff;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.header-subtitle {
-    font-size: 1rem;
-    color: #e5e5e5;
-    margin-top: 0.45rem;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .site-body {
@@ -133,8 +127,8 @@
 .button-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 0.5rem;
     margin-top: 1.2rem;
 }
@@ -143,9 +137,9 @@
     background-color: #1a237e;
     color: #fff;
     border: none;
-    padding: 0.75rem 2rem;
+    padding: 0.6rem 2rem;
     font-size: 1rem;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.2s;
@@ -256,11 +250,11 @@
     }
 
     .header-logo {
-        height: 40px;
+        height: 60px;
     }
 
     .header-title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .site-body {
@@ -299,17 +293,11 @@
     }
 
     .header-logo {
-        height: 30px;
-        margin-right: 0.5rem;
+        height: 50px;
     }
 
     .header-title {
-        font-size: 1.05rem;
-    }
-
-    .header-subtitle {
-        font-size: 0.78rem;
-        margin-top: 0.15rem;
+        font-size: 1.2rem;
     }
 
     /* Tighter body */
@@ -414,22 +402,15 @@
 /* Small phone breakpoint */
 @media (max-width: 380px) {
     .header-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        flex-direction: row;
     }
 
     .header-logo {
-        height: 25px;
-        margin-right: 0;
+        height: 35px;
     }
 
     .header-title {
-        font-size: 0.95rem;
-    }
-
-    .header-subtitle {
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
 
     .site-body {
