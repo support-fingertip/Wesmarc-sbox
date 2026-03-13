@@ -28,17 +28,19 @@
                             placeholder="Enter your full name"
                             class="input-decor"
                         ></lightning-input>
-   <lightning-input
-    label="Mobile Number"
-    type="tel"
-    value={mobileNumber}
-    data-field="mobileNumber"
-    oninput={handleInputChange}
-    required
-    maxlength="10"
-    placeholder="Enter 10-digit mobile number"
-    class="input-decor"
-></lightning-input>
+                        <lightning-input
+                            label="Mobile Number"
+                            type="tel"
+                            value={mobileNumber}
+                            data-field="mobileNumber"
+                            onchange={handleInputChange}
+                            required
+                            pattern="[6-9][0-9]{9}"
+                            max-length="10"
+                            message-when-pattern-mismatch="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
+                            placeholder="Enter 10-digit mobile number"
+                            class="input-decor"
+                        ></lightning-input>
                         <lightning-textarea
                             label="Address"
                             value={address}
@@ -46,7 +48,7 @@
                             onchange={handleInputChange}
                             required
                             placeholder="Enter your complete address"
-                            class="input-decor"
+                            class="input-decor compact-textarea"
                         ></lightning-textarea>
                         <lightning-textarea
                             label="Nature of Support"
@@ -55,7 +57,7 @@
                             onchange={handleInputChange}
                             required
                             placeholder="Describe the issue you are facing"
-                            class="input-decor"
+                            class="input-decor compact-textarea"
                         ></lightning-textarea>
                         <div class="button-container">
                             <lightning-button
@@ -92,10 +94,7 @@
         <footer class="site-footer">
             <div class="footer-content">
                 <img src={wesmarkLogoUrl} alt="Wesmarc Logo" class="footer-logo" onerror={handleLogoError} />
-                <div class="footer-details">
-                    <p class="footer-text">&copy; 2026 Wesmarc Pvt Ltd.</p>
-                    <p class="footer-contact"><a href="mailto:support@wesmarc.com">support@wesmarc.com</a></p>
-                </div>
+                
             </div>
         </footer>
     </div>

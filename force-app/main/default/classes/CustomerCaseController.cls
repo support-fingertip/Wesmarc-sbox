@@ -24,7 +24,7 @@ public without sharing class CustomerCaseController {
             checkDuplicateCase(cleanedMobile, customerName);
 
             // Get the Sales Support Team queue
-            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team1' LIMIT 1];
+            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team' LIMIT 1];
 
             // Get the Customer Support record type
             Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();
@@ -83,7 +83,7 @@ public without sharing class CustomerCaseController {
             // Check for duplicate open cases
             checkDuplicateCase(cleanedMobile, customerName);
 
-            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team1' LIMIT 1];
+            List<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Sales_Support_Team' LIMIT 1];
 
             // Get the Customer Support record type
             Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Customer Support').getRecordTypeId();

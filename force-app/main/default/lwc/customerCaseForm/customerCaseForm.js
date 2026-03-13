@@ -23,39 +23,37 @@ export default class CustomerCaseForm extends LightningElement {
         const field = event.target.dataset.field;
         if (field === 'customerName') {
             this.customerName = event.target.value;
-         } else if (field === 'mobileNumber') {
-    let value = event.target.value.replace(/[^0-9]/g, '');
-    if (value.length > 10) {
-        value = value.substring(0, 10);
-    }
-    this.mobileNumber = value;
-    // Do NOT set event.target.value
-} else if (field === 'address') {
+        } else if (field === 'mobileNumber') {
+            let value = event.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            this.mobileNumber = value;
+            event.target.value = value;
+        } else if (field === 'address') {
             this.address = event.target.value;
         } else if (field === 'issueDetails') {
             this.issueDetails = event.target.value;
         }
     }
 
-validateMobileNumber() {
-    const mobileInput = this.template.querySelector('[data-field="mobileNumber"]');
-    if (!mobileInput) return false;
-
-    // Use a local variable to handle null/undefined values safely
-    const val = this.mobileNumber || ''; 
-    const regex = /^[6-9][0-9]{9}$/;
-    const isValid = regex.test(val);
-
-    if (!isValid && val.length > 0) {
-        mobileInput.setCustomValidity('Please enter a valid 10-digit mobile number starting with 6-9');
-    } else {
-        mobileInput.setCustomValidity(''); // Reset error
+    validateMobileNumber() {
+        const mobileInput = this.template.querySelector('[data-field="mobileNumber"]');
+        if (mobileInput) {
+            const regex = /^[6-9][0-9]{9}$/;
+            if (!regex.test(this.mobileNumber)) {
+                mobileInput.setCustomValidity('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
+            } else {
+                mobileInput.setCustomValidity('');
+            }
+            mobileInput.reportValidity();
+            return regex.test(this.mobileNumber);
+        }
+        return false;
     }
 
-    mobileInput.reportValidity();
-    return isValid;
-}
     handleSubmit() {
+        alert('hi');
         if (this.isSubmitting) {
             return;
         }
