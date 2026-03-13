@@ -24,22 +24,17 @@
 
 .header-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 1rem;
 }
 
 .header-logo {
- height: 50px; margin-right: 1rem;
+    height: 80px; margin-right: 1rem;
 }
 
 .header-title {
-   color: #ffffff; font-size: 1.5rem; font-weight: 600;
-}
-
-.header-subtitle {
-    font-size: 1rem;
-    color: #e5e5e5;
-    margin-top: 0.45rem;
+   color: #ffffff; font-size: 1.8rem; font-weight: 700;
 }
 
 .site-body {
@@ -101,18 +96,23 @@
             .form-group textarea { resize: vertical; min-height: 80px; }
 .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 1.2rem;
 }
 
 .submit-btn {
-         background-color: #c9c9e5;
+    --slds-c-button-brand-color-background: #1a237e;
+    --slds-c-button-brand-color-background-hover: #0d1557;
+    --slds-c-button-brand-color-background-active: #0d1557;
+    --sds-c-button-brand-color-background: #1a237e;
+    --sds-c-button-brand-color-background-hover: #0d1557;
+    background-color: #1a237e;
     color: #fff;
     border: none;
-    padding: 1px;
+    padding: 0.6rem 2rem;
     font-size: 1rem;
-    border-radius: .5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.2s;
@@ -188,15 +188,11 @@
         gap: 0.5rem;
     }
     .header-logo {
-        height: 30px;
+        height: 50px;
         margin-right: 0.5rem;
     }
     .header-title {
-        font-size: 1.05rem;
-    }
-    .header-subtitle {
-        font-size: 0.78rem;
-        margin-top: 0.15rem;
+        font-size: 1.2rem;
     }
 
     /* Tighter body */
