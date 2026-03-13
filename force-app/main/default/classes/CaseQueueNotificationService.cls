@@ -53,10 +53,10 @@ public without sharing class CaseQueueNotificationService {
             mail.setToAddresses(toAddresses);
             mail.setSubject('Customer Complaint ' + c.CaseNumber + ' Assigned');
             mail.setHtmlBody(
-                '<p>Case ' + String.escapeHtml4(c.CaseNumber) + ' has been assigned to you. '
+                '<p>Case ' + c.CaseNumber.escapeHtml4() + ' has been assigned to you. '
                 + 'Please check and resolve the issue ASAP.</p>'
                 + '<p>Please click on the link below to view the record.</p>'
-                + '<p><a href="' + String.escapeHtml4(caseUrl) + '">' + String.escapeHtml4(caseUrl) + '</a></p>'
+                + '<p><a href="' + caseUrl.escapeHtml4() + '">' + caseUrl.escapeHtml4() + '</a></p>'
             );
             mail.setSaveAsActivity(false);
             if (orgWideEmailId != null) {
