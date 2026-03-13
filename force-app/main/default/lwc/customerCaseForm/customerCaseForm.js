@@ -53,7 +53,6 @@ export default class CustomerCaseForm extends LightningElement {
     }
 
     handleSubmit() {
-        alert('hi');
         if (this.isSubmitting) {
             return;
         }

@@ -6,12 +6,15 @@
     background: #000000;
     display: block;
     min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
 }
 
 .site-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .site-header {
@@ -29,11 +32,14 @@
 }
 
 .header-logo {
- height: 50px; margin-right: 1rem;
+    height: 50px;
+    margin-right: 1rem;
 }
 
 .header-title {
-   color: #ffffff; font-size: 1.5rem; font-weight: 600;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .header-subtitle {
@@ -49,6 +55,7 @@
     flex: 1;
     background: #f4f6fb;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .form-container {
@@ -57,13 +64,27 @@
     box-shadow: 0 3px 16px rgba(34, 34, 73, 0.10);
     padding: 1.9rem 1.2rem;
     margin-top: 1.3rem;
+    box-sizing: border-box;
 }
-        .form-heading { font-size: 1.5rem; font-weight: 600; color: #1a237e; margin-bottom: 0.25rem; }
-            .form-subheading { color: #666; font-size: 0.95rem; margin-bottom: 0.5rem; }
-            .form-divider { border: none; border-top: 2px solid #1a237e; margin-bottom: 1.5rem; }
 
+.form-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.25rem;
+}
 
+.form-subheading {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
 
+.form-divider {
+    border: none;
+    border-top: 2px solid #1a237e;
+    margin-bottom: 1.5rem;
+}
 
 .form-fields {
     display: flex;
@@ -81,43 +102,60 @@
     --sds-c-textarea-sizing-min-block-size: 60px;
     --slds-c-textarea-sizing-min-block-size: 60px;
 }
-            .form-group label .required { color: #e53935; }
-            .form-group input,
-            .form-group textarea {
-                width: 100%;
-                padding: 0.65rem 0.75rem;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                font-size: 1rem;
-                font-family: inherit;
-                transition: border-color 0.2s;
-            }
-            .form-group input:focus,
-            .form-group textarea:focus {
-                outline: none;
-                border-color: #1a237e;
-                box-shadow: 0 0 0 2px rgba(26,35,126,0.15);
-            }
-            .form-group textarea { resize: vertical; min-height: 80px; }
+
+.form-group label .required {
+    color: #e53935;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1a237e;
+    box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
 .button-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem;
     margin-top: 1.2rem;
 }
 
 .submit-btn {
-         background-color: #c9c9e5;
+    background-color: #1a237e;
     color: #fff;
     border: none;
-    padding: 1px;
+    padding: 0.75rem 2rem;
     font-size: 1rem;
-    border-radius: .5px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.2s;
+    touch-action: manipulation;
 }
-   .btn-submit:hover { background-color: #0d1557; }
+
+.submit-btn:hover {
+    background-color: #0d1557;
+}
+
 .success-container {
     background: #fff;
     border-radius: 10px;
@@ -126,49 +164,120 @@
     text-align: center;
 }
 
-  /* Error */
-            .error-msg { color: #e53935; font-size: 0.9rem; margin-bottom: 1rem; }
-            /* Success */
-            .success-card {
-                background: #fff;
-                border-radius: 8px;
-                box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-                padding: 3rem 2rem;
-                text-align: center;
-            }
-            .success-icon { font-size: 4rem; color: #4caf50; margin-bottom: 1rem; }
-            .success-heading { font-size: 2rem; font-weight: 600; color: #1a237e; margin-bottom: 0.5rem; }
-            .success-msg { color: #555; font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.5; }
-            .success-ref { color: #333; font-size: 1rem; margin-bottom: 1.5rem; }
-            /* Footer */
-            .site-footer {
-                background-color: #000000;
-                padding: 1rem 2rem;
-                margin-top: auto;
-                text-align: center;
-            }
-            .footer-logo { height: 25px; }
+/* Error */
+.error-msg {
+    color: #e53935;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Success */
+.success-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #4caf50;
+    margin-bottom: 1rem;
+}
+
+.success-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+}
+
+.success-msg,
+.success-message {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.success-ref,
+.success-reference {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    word-break: break-word;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #000000;
+    padding: 1rem 2rem;
+    margin-top: auto;
+    text-align: center;
+}
+
+.footer-logo {
+    height: 25px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .footer-details {
-    font-size: .94rem;
+    font-size: 0.94rem;
     color: #e3e3e3;
 }
 
 .footer-text {
-    font-size: .89rem;
+    font-size: 0.89rem;
     margin-bottom: 0.24rem;
 }
 
 .footer-contact {
-    font-size: .88rem;
+    font-size: 0.88rem;
     color: #b8ffe8;
 }
+
 .footer-contact a {
     color: #b8ffe8;
     text-decoration: underline;
     font-weight: 500;
 }
 
-/* Responsive Design */
+/* Tablet breakpoint */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .header-logo {
+        height: 40px;
+    }
+
+    .header-title {
+        font-size: 1.3rem;
+    }
+
+    .site-body {
+        padding: 0.75rem 0.75rem 1.5rem;
+    }
+
+    .form-container {
+        padding: 1.5rem 1rem;
+        margin-top: 1rem;
+    }
+
+    .form-heading {
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile breakpoint */
 @media (max-width: 600px) {
     .site-container {
         width: 100vw !important;
@@ -183,17 +292,21 @@
     .site-header {
         padding: 0.6rem 1rem;
     }
+
     .header-content {
         flex-direction: row;
         gap: 0.5rem;
     }
+
     .header-logo {
         height: 30px;
         margin-right: 0.5rem;
     }
+
     .header-title {
         font-size: 1.05rem;
     }
+
     .header-subtitle {
         font-size: 0.78rem;
         margin-top: 0.15rem;
@@ -213,14 +326,17 @@
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(34, 34, 73, 0.08);
     }
+
     .form-heading {
         font-size: 1.1rem;
         margin-bottom: 0.15rem;
     }
+
     .form-subheading {
         font-size: 0.82rem;
         margin-bottom: 0.3rem;
     }
+
     .form-divider {
         margin-bottom: 0.75rem;
     }
@@ -228,6 +344,13 @@
     /* Tighter field spacing */
     .form-fields {
         gap: 0.55rem;
+    }
+
+    /* Touch-friendly input sizing */
+    lightning-input,
+    lightning-textarea {
+        --sds-c-input-sizing-min-block-size: 44px;
+        --slds-c-input-sizing-min-block-size: 44px;
     }
 
     /* Smaller textarea on mobile */
@@ -239,6 +362,7 @@
     .button-container {
         margin-top: 0.75rem;
     }
+
     .submit-btn {
         width: 100%;
         font-size: 1rem;
@@ -250,15 +374,23 @@
     .success-container {
         padding: 1.2rem 0.75rem;
     }
+
     .success-icon {
         font-size: 2.8rem;
         margin-bottom: 0.5rem;
     }
+
     .success-heading {
         font-size: 1.3rem;
     }
-    .success-msg {
+
+    .success-msg,
+    .success-message {
         font-size: 0.95rem;
+    }
+
+    .success-reference {
+        font-size: 0.85rem;
     }
 
     /* Compact footer */
@@ -267,12 +399,65 @@
         margin-top: auto;
         text-align: center;
     }
+
     .footer-logo {
         height: 22px;
     }
+
     .footer-details,
     .footer-text,
     .footer-contact {
         font-size: 0.78rem;
+    }
+}
+
+/* Small phone breakpoint */
+@media (max-width: 380px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-logo {
+        height: 25px;
+        margin-right: 0;
+    }
+
+    .header-title {
+        font-size: 0.95rem;
+    }
+
+    .header-subtitle {
+        font-size: 0.7rem;
+    }
+
+    .site-body {
+        padding: 0.3rem 0.3rem 0.75rem;
+    }
+
+    .form-container {
+        padding: 0.75rem 0.5rem;
+        margin-top: 0.3rem;
+    }
+
+    .form-heading {
+        font-size: 1rem;
+    }
+
+    .form-subheading {
+        font-size: 0.75rem;
+    }
+
+    .form-fields {
+        gap: 0.4rem;
+    }
+
+    .success-icon {
+        font-size: 2.2rem;
+    }
+
+    .success-heading {
+        font-size: 1.1rem;
     }
 }
