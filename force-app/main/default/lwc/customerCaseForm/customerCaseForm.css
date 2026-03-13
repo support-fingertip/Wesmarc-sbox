@@ -206,13 +206,14 @@
 /* Footer */
 .site-footer {
     background-color: #000000;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2rem;
     margin-top: auto;
     text-align: center;
 }
 
 .footer-logo {
-    height: 25px;
+    height: 35px;
+    margin-bottom: 0.3rem;
 }
 
 .footer-content {
@@ -230,6 +231,7 @@
 .footer-text {
     font-size: 0.89rem;
     margin-bottom: 0.24rem;
+    color: #e3e3e3;
 }
 
 .footer-contact {
