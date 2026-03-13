@@ -6,7 +6,6 @@
                 <img src={wesmarkLogoUrl} alt="Wesmarc Logo" class="header-logo" onerror={handleLogoError} />
                 <div>
                     <h1 class="header-title">Wesmarc Customer Support</h1>
-                    <p class="header-subtitle">Prompt, Professional Service — Anytime</p>
                 </div>
             </div>
         </header>
@@ -16,7 +15,7 @@
             <template if:false={isSubmitted}>
                 <div class="form-container">
                     <h2 class="form-heading">Report an Issue</h2>
-                    <p class="form-subheading">Please fill out your details and our team will contact you soon.</p>
+                    <p class="form-subheading">Please fill in the details below and we will get back to you shortly.</p>
                     <hr class="form-divider"/>
                     <div class="form-fields">
                         <lightning-input
@@ -51,7 +50,7 @@
                             class="input-decor compact-textarea"
                         ></lightning-textarea>
                         <lightning-textarea
-                            label="Nature of Support"
+                            label="Issue Details"
                             value={issueDetails}
                             data-field="issueDetails"
                             onchange={handleInputChange}
